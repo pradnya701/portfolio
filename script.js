@@ -1,5 +1,14 @@
-// Scroll-triggered reveal
+// Scroll-triggered reveal with stagger for grouped elements (e.g. card grids)
 const revealEls = document.querySelectorAll('.reveal');
+
+revealEls.forEach((el, i) => {
+  const group = el.closest('.work-grid, .rec-grid');
+  if (group) {
+    const siblings = Array.from(group.querySelectorAll('.reveal'));
+    const idx = siblings.indexOf(el);
+    el.style.transitionDelay = `${idx * 90}ms`;
+  }
+});
 
 const io = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
